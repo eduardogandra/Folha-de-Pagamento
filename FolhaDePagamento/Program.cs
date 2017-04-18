@@ -108,6 +108,26 @@ namespace FolhaDePagamento
 
                         Console.Clear();
                         Console.WriteLine(" --  Consultar Folha de Pagamento --");
+                        Console.WriteLine("\nInforme o CPF do Funcionário a consultar a Folha: ");
+                        funcionario.Cpf = Console.ReadLine();
+                        funcionario = FuncionarioDAO.BuscarFuncionarioCpf(funcionario);
+                        if(funcionario != null)
+                        {
+                            Console.WriteLine("Informe o Mês da Folha de Pagamento: ");
+                            folhaPagamento.Mes = Convert.ToInt32(Console.ReadLine());
+                            //folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoMes(folhaPagamento);
+                            if(folhaPagamento != null)
+                            {
+                                Console.WriteLine("Informe o Ano da Folha de Pagamento: ");
+                                folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
+                                //folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoAno(folhaPagamento);
+                                if(folhaPagamento != null)
+                                {
+                                    //Console.WriteLine("\nFuncionário: " + );
+                                }
+                            }
+
+                        }
                         break;
 
                     case "4":
