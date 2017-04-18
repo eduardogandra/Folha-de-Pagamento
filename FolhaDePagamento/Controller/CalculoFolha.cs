@@ -10,29 +10,14 @@ namespace FolhaDePagamento.Controller
 {
     class CalculoFolha
     {
-        public double SalarioBruto (int horas, double valorHoras)
-        {
-            return 0;
-        }
+        public double salarioBruto, salarioLiquido, Inss, Fgts, impostoRenda;
 
-        public double SalarioLiquido (int horas, double valorHoras)
+        public double CalculoFolhaPagamento (int horas, double valorHoras)
         {
-            return 0;
-        }
+            salarioBruto = horas * valorHoras;
 
-        public double CalculoINSS(int horas, double valorHoras)
-        {
-            return 0;
+            return salarioBruto;
         }
-
-        public double CalculoFGTS(int horas, double valorHoras)
-        {
-            return 0;
-        }
-
-        public double CalculoIR(int horas, double valorHoras)
-        {
-            return 0;
-        }
+       
     }
 }
