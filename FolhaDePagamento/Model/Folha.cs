@@ -1,23 +1,24 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FolhaDePagamento.DAL;
+using FolhaDePagamento.Controller;
 
 namespace FolhaDePagamento.Model
 {
-    class Folha
+    class FolhaPagamento
     {
-        private int Folha { get; set; }
-        private double Salario { get; set; }
-        private double Inss { get; set;
-        private double ImpostoDeRenda{ get;set;}
-        private double Fgts {get; set;}
+        public Funcionario Funcionario  { get; set; }
+        public int Mes { get; set; }
+        public int Ano { get; set; }
+        public int HorasTrabalhadas { get; set; }
+        public double ValorHora { get; set; }
 
-        Folha Folha = new Folha();
-        Salario salario = new Salario();
-        Inss inss = new Inss();
-        ImpostoDeRenda imposto = new ImpostoDeRenda();
-        Fgts fgts = new Fgts();
+        public FolhaPagamento()
+        {
+            Funcionario = new Funcionario();
+        }
     }
 }
