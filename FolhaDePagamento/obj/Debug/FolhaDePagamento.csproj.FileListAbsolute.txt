@@ -1,0 +1,2 @@
+c:\users\Aluno\documents\visual studio 2013\Projects\FolhaDePagamento\FolhaDePagamento\bin\Debug\FolhaDePagamento.exe.config
+c:\users\Aluno\documents\visual studio 2013\Projects\FolhaDePagamento\FolhaDePagamento\obj\Debug\FolhaDePagamento.csprojResolveAssemblyReference.cache
