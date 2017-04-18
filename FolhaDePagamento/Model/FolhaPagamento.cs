@@ -15,10 +15,12 @@ namespace FolhaDePagamento.Model
         public int Ano { get; set; }
         public int HorasTrabalhadas { get; set; }
         public double ValorHora { get; set; }
+        public CalculoFolha CalculoFolha { get; set; }
 
         public FolhaPagamento()
         {
             Funcionario = new Funcionario();
+            CalculoFolha = new CalculoFolha();
         }
     }
 }
