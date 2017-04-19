@@ -16,7 +16,9 @@ namespace FolhaDePagamento
 
             Funcionario funcionario; 
             FolhaPagamento folhaPagamento; 
+            CalculoFolha calculoFolha;
             string opcao;
+            double salarioBruto, Inss, Fgts, salarioLiquido, impostoRenda;
 
             do
             {
@@ -103,8 +105,9 @@ namespace FolhaDePagamento
                         break;
 
                     case "3":
-                        funcionario = new Funcionario();
+                         funcionario = new Funcionario();
                         folhaPagamento = new FolhaPagamento();
+                        calculoFolha = new CalculoFolha();
 
                         Console.Clear();
                         Console.WriteLine(" --  Consultar Folha de Pagamento --");
@@ -115,18 +118,49 @@ namespace FolhaDePagamento
                         {
                             Console.WriteLine("Informe o Mês da Folha de Pagamento: ");
                             folhaPagamento.Mes = Convert.ToInt32(Console.ReadLine());
-                            //folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoMes(folhaPagamento);
+                            folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoMes(folhaPagamento);
                             if(folhaPagamento != null)
                             {
                                 Console.WriteLine("Informe o Ano da Folha de Pagamento: ");
                                 folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
-                                //folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoAno(folhaPagamento);
+                                folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoAno(folhaPagamento);
                                 if(folhaPagamento != null)
                                 {
-                                    //Console.WriteLine("\nFuncionário: " + );
+                                    foreach(FolhaPagamento folhaPagamentoCadastrada in FolhaPagamentoDAO.BuscarFolhaPagamentoFuncionarioCpf(funcionario))
+                                    {
+                                        Console.WriteLine("\nFuncionário: " + folhaPagamentoCadastrada.Funcionario.Nome);
+                                        Console.WriteLine("CPF: " + folhaPagamentoCadastrada.Funcionario.Cpf);
+                                        Console.WriteLine("Mês / Ano : " + folhaPagamentoCadastrada.Mes + "/ " + folhaPagamentoCadastrada.Ano);
+                                        Console.WriteLine("Horas Trabalhadas: " + folhaPagamentoCadastrada.HorasTrabalhadas);
+                                        Console.WriteLine("\tValor da Hora: " + folhaPagamentoCadastrada.ValorHora.ToString("C2"));
+                                        salarioBruto = calculoFolha.CalculoFolhaPagamentoSalarioBruto(folhaPagamentoCadastrada.HorasTrabalhadas, folhaPagamentoCadastrada.ValorHora);
+                                        Console.WriteLine("\tSalário Bruto: " + salarioBruto.ToString("C2"));
+                                        impostoRenda = calculoFolha.CalculoFolhaPagamentoIR(folhaPagamentoCadastrada.HorasTrabalhadas, folhaPagamentoCadastrada.ValorHora);
+                                        Console.WriteLine("\tImposto de Renda: " + impostoRenda.ToString("C2"));
+                                        Inss = calculoFolha.CalculoFolhaPagamentoInss(folhaPagamentoCadastrada.HorasTrabalhadas, folhaPagamentoCadastrada.ValorHora);
+                                        Console.WriteLine("\tINSS: " + Inss.ToString("C2"));
+                                        Fgts = calculoFolha.CalculoFolhaPagamentoFgts(folhaPagamentoCadastrada.HorasTrabalhadas, folhaPagamentoCadastrada.ValorHora);
+                                        Console.WriteLine("\tFGTS: " + Fgts.ToString("C2"));
+                                        salarioLiquido = salarioBruto - impostoRenda - Inss;
+                                        Console.WriteLine("\tSalário Líquido: " + salarioLiquido.ToString("C2"));
+
+                                    }
+                                    
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nAno Inválido!");
                                 }
                             }
+                            else
+                            {
+                                Console.WriteLine("\nMês Inválido!");
+                            }
 
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nCPF Inválido!");
                         }
                         break;
 
