@@ -84,19 +84,31 @@ namespace FolhaDePagamento
 
                             Console.WriteLine("Informe o Mês da Folha: ");
                             folhaPagamento.Mes = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Informe o Ano da Folha: ");
-                            folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
-                            //validar se o mês e ano já pertencem a este CPF atual
-                            //será que são dois if, um para ano e um para mês?
-                            //se não pertencer continuar a cadartrar a folha, seguindo com o cadastro
+                            folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoMes(folhaPagamento);
+                            if(folhaPagamento != null)
+                            {
+                                Console.WriteLine("Informe o Ano da Folha: ");
+                                folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
+                                folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoAno(folhaPagamento);
+                                if(folhaPagamento != null)
+                                {
+                                    Console.WriteLine("Informe Quantidade de Horas trabalhadas: ");
+                                    folhaPagamento.HorasTrabalhadas = Convert.ToInt32(Console.ReadLine());
+                                    Console.WriteLine("Informe o Valor da Hora Trabalhada: ");
+                                    folhaPagamento.ValorHora = Convert.ToDouble(Console.ReadLine());
 
-
-                            Console.WriteLine("Informe Quantidade de Horas trabalhadas: ");
-                            folhaPagamento.HorasTrabalhadas = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Informe o Valor da Hora Trabalhada: ");
-                            folhaPagamento.ValorHora = Convert.ToDouble(Console.ReadLine());
-
-                            FolhaPagamentoDAO.SalvarFolhaPagamento(folhaPagamento);
+                                    FolhaPagamentoDAO.SalvarFolhaPagamento(folhaPagamento);
+                                    Console.WriteLine("\nInformações da Folha de Pagamento Salvas com Sucesso!!!...");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nAno Inválido!");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nMês Inválido!");
+                            }
                         }
                         else
                         {
