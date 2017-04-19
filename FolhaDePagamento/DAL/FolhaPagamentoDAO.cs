@@ -17,6 +17,7 @@ namespace FolhaDePagamento.DAL
             folhaPagamento.Add(folhasPagamentos);
         }
 
+
         public static List<FolhaPagamento> BuscarFolhaPagamentoFuncionarioCpf(Funcionario funcionario)
         {
             List<FolhaPagamento> folhaPagamentoAux = new List<FolhaPagamento>();
@@ -24,38 +25,35 @@ namespace FolhaDePagamento.DAL
             {
                 if (folhaPagamentoCadastrada.Funcionario.Cpf.Equals(funcionario.Cpf))
                 {
-                    folhaPagamentoAux.Add(folhaPagamentoCadastrada);
-                }
-            }
-            return folhaPagamentoAux;
-        }
-        
-         public static List<FolhaPagamento> BuscarFolhaPagamentoMes(FolhaPagamento folhasPagamentos)
-        {
-            List<FolhaPagamento> folhaPagamentoAux = new List<FolhaPagamento>();
-            foreach (FolhaPagamento folhaPagamentoCadastrada in folhaPagamento)
-            {
-                if (folhaPagamentoCadastrada.Mes.Equals(folhasPagamentos.Mes))
-                {
-                    folhaPagamentoAux.Add(folhaPagamentoCadastrada);
                     
+                    folhaPagamentoAux.Add(folhaPagamentoCadastrada);
                 }
             }
             return folhaPagamentoAux;
         }
 
-        public static List<FolhaPagamento> BuscarFolhaPagamentoAno(FolhaPagamento folhasPagamentos)
+        public static FolhaPagamento BuscarFolhaPagamentoMes(FolhaPagamento folhasPagamentos)
         {
-            List<FolhaPagamento> folhaPagamentoAux = new List<FolhaPagamento>();
             foreach (FolhaPagamento folhaPagamentoCadastrada in folhaPagamento)
             {
-                if (folhaPagamentoCadastrada.Ano.Equals(folhasPagamentos.Ano))
+                if (folhasPagamentos.Mes.Equals(folhaPagamentoCadastrada.Mes))
                 {
-                    folhaPagamentoAux.Add(folhaPagamentoCadastrada);
-
+                    return folhaPagamentoCadastrada;
                 }
             }
-            return folhaPagamentoAux;
+            return null;
+        }
+
+        public static FolhaPagamento BuscarFolhaPagamentoAno(FolhaPagamento folhasPagamentos)
+        {
+            foreach (FolhaPagamento folhaPagamentoCadastrada in folhaPagamento)
+            {
+                if (folhasPagamentos.Ano.Equals(folhaPagamentoCadastrada.Ano))
+                {
+                    return folhaPagamentoCadastrada;
+                }
+            }
+            return null;
         }
     }
 }
