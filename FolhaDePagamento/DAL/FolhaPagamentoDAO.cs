@@ -43,6 +43,32 @@ namespace FolhaDePagamento.DAL
             }
             return null;
         }
+        
+        public static bool ValidacaoSimplesMes (int mes)
+        {
+            if(mes >= 1 && mes <= 12 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        }
+
+        public static bool ValidacaoSimplesAno(int ano)
+        {
+            if (ano > Convert.ToInt32(DateTime.Now.Year))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
 
         public static FolhaPagamento BuscarFolhaPagamentoAno(FolhaPagamento folhasPagamentos)
         {
