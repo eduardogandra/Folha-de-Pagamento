@@ -78,18 +78,48 @@ namespace FolhaDePagamento
 
                             Console.WriteLine("Informe o Mês da Folha: ");
                             folhaPagamento.Mes = Convert.ToInt32(Console.ReadLine());
-                            
-                            Console.WriteLine("Informe o Ano da Folha: ");
-                            folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
-                                
-                            Console.WriteLine("Informe Quantidade de Horas trabalhadas: ");
-                            folhaPagamento.HorasTrabalhadas = Convert.ToInt32(Console.ReadLine());
+                            if(FolhaPagamentoDAO.ValidacaoSimplesMes(folhaPagamento.Mes) == true)
+                            {
+                                Console.WriteLine("Informe o Ano da Folha: ");
+                                folhaPagamento.Ano = Convert.ToInt32(Console.ReadLine());
+                                if(FolhaPagamentoDAO.ValidacaoSimplesAno(folhaPagamento.Ano) == true)
+                                {
+                                    folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoMes(folhaPagamento);
+                                    if(folhaPagamento != null)
+                                    {
+                                        folhaPagamento = FolhaPagamentoDAO.BuscarFolhaPagamentoAno(folhaPagamento);
+                                        if(folhaPagamento != null)
+                                        {
+                                            Console.WriteLine("Informe Quantidade de Horas trabalhadas: ");
+                                            folhaPagamento.HorasTrabalhadas = Convert.ToInt32(Console.ReadLine());
 
-                            Console.WriteLine("Informe o Valor da Hora Trabalhada: ");
-                            folhaPagamento.ValorHora = Convert.ToDouble(Console.ReadLine());
+                                            Console.WriteLine("Informe o Valor da Hora Trabalhada: ");
+                                            folhaPagamento.ValorHora = Convert.ToDouble(Console.ReadLine());
 
-                           FolhaPagamentoDAO.SalvarFolhaPagamento(folhaPagamento);
-                           Console.WriteLine("\nInformações da Folha de Pagamento Salvas com Sucesso!!!...");     
+                                            FolhaPagamentoDAO.SalvarFolhaPagamento(folhaPagamento);
+                                            Console.WriteLine("\nInformações da Folha de Pagamento Salvas com Sucesso!!!...");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nAno Já Cadastrado!!!");
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("\nMês Já Cadastrado!!!");
+                                    }
+                  
+                                }
+                                else
+                                {
+                                    Console.WriteLine("\nAno Inválido!!!");
+                                }
+ 
+                            }
+                            else
+                            {
+                                Console.WriteLine("\nMês Inválido!!!");
+                            }      
                         }
                         else
                         {
