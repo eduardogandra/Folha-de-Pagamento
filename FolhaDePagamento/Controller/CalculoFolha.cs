@@ -11,16 +11,22 @@ namespace FolhaDePagamento.Controller
     class CalculoFolha
     {
 
-        public double salarioBruto, salarioLiquido, Inss, Fgts, impostoRenda, aliquota;
+        private double salarioBruto = 0, Inss = 0, Fgts = 0, impostoRenda = 0, aliquota = 0;
 
         public double CalculoFolhaPagamentoSalarioBruto (int horas, double valorHoras)
         {
+            salarioBruto = 0;
+
             salarioBruto = horas * valorHoras;
             return salarioBruto;
         }
 
         public double CalculoFolhaPagamentoIR (int horas, double valorHoras)
         {
+            salarioBruto = 0;
+            impostoRenda = 0;
+            aliquota = 0;
+
             salarioBruto = horas * valorHoras;
 
             if(salarioBruto <= 1903.98)
@@ -54,6 +60,9 @@ namespace FolhaDePagamento.Controller
 
         public double CalculoFolhaPagamentoInss(int horas, double valorHoras)
         {
+            salarioBruto = 0;
+            Inss = 0;
+
             salarioBruto = horas * valorHoras;
 
             if(salarioBruto <= 1659.38)
@@ -70,7 +79,7 @@ namespace FolhaDePagamento.Controller
             }
             if(salarioBruto > 5531.31)
             {
-                Inss = salarioBruto - 608.44;
+                Inss = 608.44;
             }
 
             return Inss;
@@ -78,6 +87,9 @@ namespace FolhaDePagamento.Controller
 
         public double CalculoFolhaPagamentoFgts(int horas, double valorHoras)
         {
+            salarioBruto = 0;
+            Fgts = 0;
+
             salarioBruto = horas * valorHoras;
 
             Fgts = (salarioBruto * 8) / 100;
